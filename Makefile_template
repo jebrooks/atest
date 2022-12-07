@@ -1,0 +1,10 @@
+ATESTDIR = <project root dir>
+MOCKDIR = $(ATESTDIR)/mocks
+DEPOBJS = $(MOCKDIR)/AES256.o $(MOCKDIR)/SHA256.o $(MOCKDIR)/Curve25519.o <your test obj file>
+CFLAGS = -Wall -DTEST -I/$(ATESTDIR) -I/$(MOCKDIR)
+
+%.o: %.cpp
+	gcc $(CFLAGS) -c -o $@ $<
+
+test_reservations: $(DEPOBJS)
+	gcc -v -lstdc++ $(CFLAGS) -o $@ $^
