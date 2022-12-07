@@ -1,10 +1,12 @@
+#example make file for mytest.cpp in your sketch dir
+
 ATESTDIR = <project root dir>
 MOCKDIR = $(ATESTDIR)/mocks
-DEPOBJS = $(MOCKDIR)/AES256.o $(MOCKDIR)/SHA256.o $(MOCKDIR)/Curve25519.o <your test obj file>
+DEPOBJS = $(MOCKDIR)/AES256.o $(MOCKDIR)/SHA256.o $(MOCKDIR)/Curve25519.o mytest.o 
 CFLAGS = -Wall -DTEST -I/$(ATESTDIR) -I/$(MOCKDIR)
 
 %.o: %.cpp
 	gcc $(CFLAGS) -c -o $@ $<
 
-test_reservations: $(DEPOBJS)
+mytest: $(DEPOBJS)
 	gcc -v -lstdc++ $(CFLAGS) -o $@ $^
